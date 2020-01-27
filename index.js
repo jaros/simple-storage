@@ -1,11 +1,15 @@
 const express = require('express')
 const multer = require('multer')
 const cors = require('cors')
+const serveIndex = require('serve-index');
 
 const app = express()
 
 app.use(cors())
 app.set('view engine', 'pug')
+
+app.use('/photos', express.static(__dirname + '/uploads'))
+app.use('/photos', serveIndex(__dirname + '/uploads'))
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
